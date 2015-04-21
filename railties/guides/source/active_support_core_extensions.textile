@@ -1071,7 +1071,7 @@ Instance methods are created as well for convenience, they are just proxies to t
 module ActionView
   class Base
     cattr_accessor :field_error_proc
-    @@field_error_proc = Proc.new{ ... }
+    @@field_error_proc = proc { ... }
   end
 end
 </ruby>
@@ -2887,7 +2887,7 @@ clear.bind({:a => 1}).call # => {}
 Active Support defines +Proc#bind+ with an analogous purpose:
 
 <ruby>
-Proc.new { size }.bind([]).call # => 0
+proc { size }.bind([]).call # => 0
 </ruby>
 
 As you see that's callable and bound to the argument, the return value is indeed a +Method+.

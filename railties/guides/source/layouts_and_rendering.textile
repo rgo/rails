@@ -398,7 +398,7 @@ You can also decide the layout by passing a Proc object, the block you give the 
 
 <ruby>
 class ProductsController < ApplicationController
-  layout Proc.new { |controller| controller.request.xhr? ? 'popup' : 'application' }
+  layout proc { |controller| controller.request.xhr? ? 'popup' : 'application' }
 end
 </ruby>
 

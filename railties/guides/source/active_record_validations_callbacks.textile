@@ -550,7 +550,7 @@ Finally, it's possible to associate +:if+ and +:unless+ with a +Proc+ object whi
 <ruby>
 class Account < ActiveRecord::Base
   validates :password, :confirmation => true,
-    :unless => Proc.new { |a| a.password.blank? }
+    :unless => proc { |a| a.password.blank? }
 end
 </ruby>
 
@@ -892,7 +892,7 @@ The way form fields with errors are treated is defined by +ActionView::Base.fiel
 Here is a simple example where we change the Rails behavior to always display the error messages in front of each of the form fields with errors. The error messages will be enclosed by a +span+ element with a +validation-error+ CSS class. There will be no +div+ element enclosing the +input+ element, so we get rid of that red border around the text field. You can use the +validation-error+ CSS class to style it anyway you want.
 
 <ruby>
-ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
+ActionView::Base.field_error_proc = proc do |html_tag, instance|
   if instance.error_message.kind_of?(Array)
     %(#{html_tag}<span class="validation-error">&nbsp;
       #{instance.error_message.join(',')}</span>).html_safe
@@ -1119,7 +1119,7 @@ Finally, it's possible to associate +:if+ and +:unless+ with a +Proc+ object. Th
 <ruby>
 class Order < ActiveRecord::Base
   before_save :normalize_card_number,
-    :if => Proc.new { |order| order.paid_with_card? }
+    :if => proc { |order| order.paid_with_card? }
 end
 </ruby>
 
@@ -1130,7 +1130,7 @@ When writing conditional callbacks, it's possible to mix both +:if+ and +:unless
 <ruby>
 class Comment < ActiveRecord::Base
   after_create :send_email_to_author, :if => :author_wants_emails?,
-    :unless => Proc.new { |comment| comment.post.ignore_comments? }
+    :unless => proc { |comment| comment.post.ignore_comments? }
 end
 </ruby>
 
